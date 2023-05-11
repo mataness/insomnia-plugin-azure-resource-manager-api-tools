@@ -1,5 +1,5 @@
 const { DefaultAzureCredential } = require("@azure/identity");
-const tokenProvider = new DefaultAzureCredential();
+const tokenProvider = new DefaultAzureCredential({});
 
 module.exports.templateTags = [{
     name: 'AzureIdentityToken',
