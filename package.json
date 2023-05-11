@@ -1,7 +1,6 @@
 {
   "name": "insomnia-plugin-azure-resource-manager-api-tools",
-  "version": "0.0.1",
-  "private": true,
+  "version": "1.0.1",
   "insomnia": {
     "name": "azure-resource-manager-api-tools",
     "displayName": "Azure Resource Manager API tools",
