@@ -6,8 +6,7 @@ This plugin is using "@azure/identity" to acquire tokens. You must have any of A
 The logged on user will be used to acquire tokens in this plugin.
 
 # Usage
-1. Open a new request, switch to the "Headers" tab,
-2. In the header name field, enter `Authorization`,
-3. In the value field type <kbd>control</kbd> + <kbd>space</kbd> and from the tag menu, select "Azure Identity Token"
+1. Open a new request, in the 'Auth' tab, select `Bearer`,
+2. In the value field type <kbd>control</kbd> + <kbd>space</kbd> and from the tag menu, select "Azure Identity Token".
 
  
