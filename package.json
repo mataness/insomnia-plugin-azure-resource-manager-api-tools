@@ -20,7 +20,7 @@
   },
   "main": "main.js",
   "dependencies": {
-    "@azure/identity": "^3.1.4",
+    "@azure/identity": "^3.2.1",
     "jwt-decode": "^3.1.2"
   }
 }
