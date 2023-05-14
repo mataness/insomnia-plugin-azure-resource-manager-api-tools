@@ -3,7 +3,6 @@ const jwtDecode = require('jwt-decode');
 
 const tokenProvider = new DefaultAzureCredential({});
 const azureManagementEndpoint = "https://management.azure.com";
-const invalidUrlParamValue = "/&&&/";
 const subscriptionIdTemplateTag = "AzSubscriptionID";
 const resourceGroupTemplateTag = "AzResourceGroup";
 let storedSelectedSubscriptionId = "";
