@@ -1,10 +1,10 @@
 {
   "name": "insomnia-plugin-azure-resource-manager-api-tools",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "insomnia": {
     "name": "azure-resource-manager-api-tools",
     "displayName": "Azure Resource Manager API tools",
-    "description": "A set of utilities that can be used to query Azure Resource Manager API. Currently only contains a plugin that acquires JWT bearer tokens to query Azure Resource Manager",
+    "description": "A set of utilities that can be used to query Azure Resource Manager API.",
     "publisher": {
       "name": "Matan Shabtay"
     },
@@ -13,6 +13,10 @@
       "core": "*",
       "cli": "*"
     }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mataness/insomnia-plugin-azure-resource-manager-api-tools.git"
   },
   "main": "main.js",
   "dependencies": {
