@@ -7,7 +7,7 @@ A set of utilities that can be used to query Azure Resource Manager API using [I
 
  1. Acquires JWT bearer tokens to query Azure Resource Manager
  2. Lists all available subscriptions and stores the selected subscription as variable
- 3. Lists all available resource groups under the selected subscription and stores the selected subscription as variable
+ 3. Lists all available resource groups under the selected subscription and stores the selected resource group as variable
 
   
   
