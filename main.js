@@ -1,7 +1,7 @@
-const { DefaultAzureCredential } = require("@azure/identity");
+const { DefaultAzureCredential, AzureCliCredential } = require("@azure/identity");
 const jwtDecode = require('jwt-decode');
 
-const tokenProvider = new DefaultAzureCredential({});
+let tokenProvider = new DefaultAzureCredential({});
 const azureManagementEndpoint = "https://management.azure.com";
 const subscriptionIdTemplateTag = "AzSubscriptionID";
 const resourceGroupTemplateTag = "AzResourceGroup";
@@ -27,10 +27,10 @@ const fetchArmResources = async (context, url, useCache) => {
 
     let insertionTimeStr = await context.store.getItem(insertionTimeKey);
 
-    if(useCache && insertionTimeStr) {
+    if (useCache && insertionTimeStr) {
         let insertionTime = parseInt(insertionTimeStr);
 
-        if(now - insertionTime > 1000 * 60 * 10) {
+        if (now - insertionTime > 1000 * 60 * 10) {
             await context.store.removeItem(insertionTimeKey);
             await context.store.removeItem(dataKey);
         } else {
@@ -52,7 +52,7 @@ const fetchArmResources = async (context, url, useCache) => {
     const response = await fetch(request);
     const json = await response.text();
 
-    if(useCache) {
+    if (useCache) {
         await context.store.setItem(insertionTimeKey, now.toString());
         await context.store.setItem(dataKey, json);
     }
@@ -91,7 +91,28 @@ const getTokenAsync = async (context, audience, forceRefresh) => {
 
     }
 
-    const token = await tokenProvider.getToken(audience);
+    let token;
+
+    try {
+        token = await tokenProvider.getToken(audience);
+    } catch (err) {
+        if (!(tokenProvider instanceof AzureCliCredential)) {
+            try {
+                // When failing to authenticate using DefaultAzureCredential, fallback to Azure CLI as a last resort
+                const cliTokenProvider = new AzureCliCredential({});
+                token = await cliTokenProvider.getToken(azureManagementEndpoint + "/.default");
+
+                tokenProvider = cliTokenProvider;
+            }
+            catch (err) {
+            }
+        }
+
+        if (!token) {
+            throw "Failed to acquire JWT bearer token from Azure Active Directory, please make sure that you are logged into your Azure AD tenant by opening powershell and running 'az login'.\nFull error:\n" + err;
+        }
+    }
+
     await context.store.setItem(insertionTimeKey, now.toString());
     await context.store.setItem(jwtKey, token.token);
 
@@ -102,7 +123,7 @@ module.exports.templateTags = [
     {
         name: 'AzureIdentityToken',
         displayName: 'Azure Identity Token',
-        description: 'Acquires Azure Active Directory on behalf of the logged in user using Azure Identity',
+        description: 'Acquires Azure Active Directory JWT bearer token on behalf of the logged in user using Azure Identity',
         args: [
             {
                 displayName: 'Audience',
