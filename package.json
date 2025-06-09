@@ -1,6 +1,6 @@
 {
   "name": "insomnia-plugin-azure-resource-manager-api-tools",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "insomnia": {
     "name": "azure-resource-manager-api-tools",
     "displayName": "Azure Resource Manager API tools",
@@ -20,7 +20,7 @@
   },
   "main": "main.js",
   "dependencies": {
-    "@azure/identity": "^3.2.1",
-    "jwt-decode": "^3.1.2"
+    "@azure/identity": "^4.10.0",
+    "jwt-decode": "^4.0.0"
   }
 }

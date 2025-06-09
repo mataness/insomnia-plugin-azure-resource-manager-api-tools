@@ -34,3 +34,6 @@ The logged on user will be used to acquire tokens in this plugin.
 1. You first must select a subscription ID using the "AzSubscriptionID" tag
 2. In the url, type <kbd>control</kbd> + <kbd>space</kbd> and from the tag menu, select "AzResourceGroup"
 3. Too see all available resource groups, click on the  "AzResourceGroup" tag. Paste the selected resource group in the relevant text box
+
+# Known issues
+1. Error: unknown block tag: AzureIdentityToken - As the plugin uses Azure.Identity library behind the scenes. This library often relies on the Azure CLI or other developer tools under the hood (e.g., AzureCliCredential, VisualStudioCredential) to authenticate. These methods require shell access and permission to execute external process, therefore, the plugin needs to run with elevated access, which is true by default on older versions of Insomnia. In newer versions of Insomnia, you need to enable the relevant checkbox in Insomnia's plugin preferences.
